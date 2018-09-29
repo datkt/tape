@@ -1,0 +1,44 @@
+{
+  "name": "ktape",
+  "version": "0.0.1",
+  "description": "TAP output producing test runner for Kotlin",
+  "src": [
+    "include/ktape.h",
+    "assert.kt",
+    "callback.kt",
+    "constants.kt",
+    "context.kt",
+    "noop.kt",
+    "options.kt",
+    "package.kt",
+    "result.kt",
+    "test.kt",
+    "truthy.kt"
+  ],
+  "directories": {
+    "include": "include/",
+    "ktape": "tape/"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datkt/tape.git"
+  },
+  "keywords": [
+    "datkt",
+    "dat",
+    "kotlin",
+    "tape",
+    "tap",
+    "test",
+    "runner"
+  ],
+  "author": "Joseph Werle <werle@littlstar.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/datkt/tape/issues"
+  },
+  "homepage": "https://github.com/datkt/tape#readme"
+}
