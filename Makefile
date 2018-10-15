@@ -13,6 +13,10 @@ TEST ?= test/
 NAME ?= ktape
 BUILD ?= build
 PREFIX ?= /usr/local
+SHARED_LIB_SUFFIX ?= so
+ifeq ($(OS),Darwin)
+SHARED_LIB_SUFFIX = dylib
+endif
 
 INCLUDE += ktape.h
 
@@ -22,9 +26,9 @@ CLASSES += $(wildcard **/**/*.class)
 
 HEADER ?= $(NAME)_api.h
 STATIC_LIBRARY ?= $(BUILD)/lib/lib$(NAME).a
-SHARED_LIBRARY ?= $(BUILD)/lib/lib$(NAME).so
+SHARED_LIBRARY ?= $(BUILD)/lib/lib$(NAME).$(SHARED_LIB_SUFFIX)
 KOTLIN_LIBRARY ?= $(BUILD)/lib/$(NAME).klib
-FRAMEWORK_LIBRARY ?= $(BUILD)/lib/$(NAME).frame
+FRAMEWORK_LIBRARY ?= $(BUILD)/lib/$(NAME).framework
 
 KCCFLAGS += -output $(NAME)
 
