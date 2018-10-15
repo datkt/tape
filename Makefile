@@ -8,13 +8,13 @@ MKDIR = mkdir -p
 INSTALL ?= install
 
 OS ?= $(shell uname)
-SRC += ktape/
+SRC += *.kt
 TEST ?= test/
 NAME ?= ktape
 BUILD ?= build
 PREFIX ?= /usr/local
 
-INCLUDE += include/ktape.h
+INCLUDE += ktape.h
 
 CLASSES += $(wildcard *.class)
 CLASSES += $(wildcard **/*.class)

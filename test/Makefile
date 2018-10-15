@@ -26,7 +26,7 @@ $(TEST): $(TESTS)
 	$(KCC) -library $(LIB) -produce program -output $(TEST) $(SRC) $^
 	./$@
 
-.PHONY: clen
+.PHONY: clean
 clean:
 	$(RM) $(TEST) $(CLASSES)
 	$(MAKE) $@ -C c/
