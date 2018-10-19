@@ -12,15 +12,7 @@ course, from [source][#install-from-source]
 ### From NPM
 
 ```sh
-$ npm install ktape
-```
-
-**Note:** *This will install **ktape** into `node_modules/ktape`*
-
-### From IMS
-
-```sh
-$ ims ktape
+$ npm install datkt/ktape
 ```
 
 **Note:** *This will install **ktape** into `node_modules/ktape`*
@@ -40,6 +32,46 @@ $ ghi install datkt/ktape
 ```
 
 ### Install From Source
+
+```sh
+$ git clone git@github.com:datkt/ktape.git
+$ cd ktape
+$ make
+$ make install
+```
+
+## Usage
+
+```kotlin
+import ktape.*
+import lerp.*
+
+fun main(args: Array<String>) {
+  test("lerp(a, b, c)", fun(t: Test) {
+    // tests
+  })
+}
+```
+
+## API
+
+### `test(name: String, callback: (t: Test) -> Unit?)`
+
+Creates and returns a new named scoped test. The test callback
+will not be invoked if null is given.
+
+```kotlin
+test("function()", fun(t: Test) {
+  t.plan(1)
+  t.ok(true, "we're okay")
+  t.end()
+})
+```
+
+### `t.plan(count: Int): Test`
+
+Ensure a planned assertion count for a test. Will throw `Error` if
+`count` is `0`.
 
 ## References
 

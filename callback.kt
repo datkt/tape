@@ -2,6 +2,6 @@ package ktape
 
 /**
  * An alias for a function callback used for
- * a Test runner.
+ * a test runner.
  */
 typealias Callback = (t: Test) -> Unit?

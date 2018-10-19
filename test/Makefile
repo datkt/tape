@@ -12,6 +12,8 @@ CLASSES += $(wildcard *.class )
 CLASSES += $(wildcard **/*.class)
 CLASSES += $(wildcard **/**/*.class)
 
+KCCFLAGS = -library $(LIB) -produce program -output $(TEST)
+
 .PHONY: default
 default: test test/c
 
@@ -23,8 +25,12 @@ test/c:
 	$(MAKE) -C c/
 
 $(TEST): $(TESTS)
-	$(KCC) -library $(LIB) -produce program -output $(TEST) $(SRC) $^
+ifndef NPM
+	$(KCC) $(KCCFLAGS) $^
 	./$@
+else
+	@$(KCC) $(KCCFLAGS) $^
+endif
 
 .PHONY: clean
 clean:

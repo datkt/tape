@@ -27,3 +27,4 @@ META-INF/
 *.class
 test/c/test
 *.o
+node_modules/

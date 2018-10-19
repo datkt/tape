@@ -1,7 +1,28 @@
 package ktape
 
-import ktape.Test
 import ktape.Callback
+import ktape.Results
+import ktape.Test
+
+private var results: Results? = null
+
+/**
+ * Explicitly initialize module variables.
+ */
+fun init() {
+  if (null == results) {
+    results = Results()
+  }
+}
+
+/**
+ * Explicitly de-initialize module variables.
+ */
+fun deinit() {
+  if (null != results) {
+    results = null
+  }
+}
 
 /**
  * Creates and returns a new named scoped test. The test callback
@@ -9,6 +30,11 @@ import ktape.Callback
  */
 fun test(name: String, callback: Callback? = null): Test {
   val t = Test(name, false, callback)
+
+  init()
+
+  results?.push(t)
+
   if (null != callback) {
     t.run()
   }

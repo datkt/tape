@@ -1,11 +1,12 @@
 package test
 
-fun simple(): Boolean {
-  var called = false
+import test.OK
+import ktape.test
 
-  ktape.test("simple", fun(_) {
-    called = true
+fun simple(ok: OK): Boolean {
+  test("simple", fun(_) {
+    ok(true, "'test(name, cb)' callback function was called")
   })
 
-  return called
+  return true
 }

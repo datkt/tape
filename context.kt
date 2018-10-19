@@ -6,6 +6,5 @@ package ktape
 data class Context(
   val name: String? = UNNAMED_TEST,
   val skip: Boolean = false,
-  var asserts: Int = 0,
-  var pending: Int = 0
+  var asserts: Int = 0
 )
