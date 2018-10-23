@@ -6,7 +6,7 @@ CFLAGS += -L ../../deps/*
 CFLAGS += -I ../../build/include
 CFLAGS += -I ../../deps
 
-CFLAGS += -l ktape
+CFLAGS += -l tape
 
 export LD_LIBRARY_PATH += ":../../build/lib"
 

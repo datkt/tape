@@ -1,4 +1,4 @@
-package ktape
+package tape
 
 /**
  * A NO-OP callback for a Test runner.

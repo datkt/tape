@@ -1,9 +1,9 @@
 package test
 
 import test.OK
-import ktape.AssertionOptions
-import ktape.UNNAMED_OPERATOR
-import ktape.UNNAMED_ASSERT
+import tape.AssertionOptions
+import tape.UNNAMED_OPERATOR
+import tape.UNNAMED_ASSERT
 
 fun options(ok: OK): Boolean {
   val defaultOptions = AssertionOptions()

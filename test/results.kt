@@ -1,7 +1,7 @@
 package test
 
 import test.OK
-import ktape.Results
+import tape.Results
 
 fun results(ok: OK): Boolean {
   ok(null, null)

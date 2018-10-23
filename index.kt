@@ -1,8 +1,8 @@
-package ktape
+package tape
 
-import ktape.Callback
-import ktape.Results
-import ktape.Test
+import tape.Callback
+import tape.Results
+import tape.Test
 
 private var results: Results? = null
 
@@ -31,6 +31,7 @@ fun deinit() {
 fun test(name: String, callback: Callback? = null): Test {
   val t = Test(name, false, callback)
 
+  // ensure library is initialized
   init()
 
   results?.push(t)
@@ -38,6 +39,7 @@ fun test(name: String, callback: Callback? = null): Test {
   if (null != callback) {
     t.run()
   }
+
   return t
 }
 

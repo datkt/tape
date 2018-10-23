@@ -1,39 +1,33 @@
 package test
 
 import test.OK
-import ktape.Context
-import ktape.AssertionResult
-import ktape.AssertionOptions
+import tape.Context
+import tape.AssertionResult
+import tape.AssertionOptions
 
 fun assert(ok: OK): Boolean {
   val ctx = Context()
-  ok(
-    ktape.assert(ctx, true) is AssertionResult,
-    "assert(ctx, true) returns AssertionResult"
-  )
 
-  ok(1 == ctx.asserts, "ctx.asserts incremented after assertion")
+  ok(0 == ctx.asserts, "0 == ctx.asserts")
 
-  val result = ktape.assert(
+  val result = tape.assert(
     ctx,
-    false,
+    0,
     AssertionOptions(
       op = "test",
       error = "error",
       message = "oops"
   ))
 
-  ok(2 == ctx.asserts, "ctx.asserts incremented after assertion")
+  ok(1 == ctx.asserts, "ctx.asserts incremented after assertion")
   ok("error" == result.error, "result error set to assertion error")
   ok("oops" == result.name, "result message set to assertion name")
   ok("test" == result.op, "result op set to assertion op")
 
   ok(
-    "oops" == ktape.assert(ctx, 0, AssertionOptions(message = "oops")).error,
+    "oops" == tape.assert(ctx, 0, AssertionOptions(message = "oops")).error,
     "result error set to result assertion message"
   )
-
-  ok(3 == ctx.asserts, "ctx.asserts incremented after assertion")
 
   return true
 }

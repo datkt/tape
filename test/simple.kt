@@ -1,7 +1,7 @@
 package test
 
 import test.OK
-import ktape.test
+import tape.test
 
 fun simple(ok: OK): Boolean {
   test("simple", fun(_) {

@@ -1,4 +1,4 @@
-package ktape
+package tape
 
 /**
  * A data class for an assertion result.

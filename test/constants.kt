@@ -2,19 +2,19 @@ package test
 
 import test.OK
 
-import ktape.UNNAMED_TEST
-import ktape.UNNAMED_ASSERT
-import ktape.UNNAMED_OPERATOR
-import ktape.OK_OPERATOR
-import ktape.NOT_OK_OPERATOR
-import ktape.FAIL_OPERATOR
-import ktape.PASS_OPERATOR
-import ktape.SKIP_OPERATOR
-import ktape.ERROR_OPERATOR
-import ktape.EQUAL_OPERATOR
-import ktape.SHOULD_BE_TRUTHY
-import ktape.SHOULD_BE_FALSY
-import ktape.SHOULD_BE_EQUAL
+import tape.UNNAMED_TEST
+import tape.UNNAMED_ASSERT
+import tape.UNNAMED_OPERATOR
+import tape.OK_OPERATOR
+import tape.NOT_OK_OPERATOR
+import tape.FAIL_OPERATOR
+import tape.PASS_OPERATOR
+import tape.SKIP_OPERATOR
+import tape.ERROR_OPERATOR
+import tape.EQUAL_OPERATOR
+import tape.SHOULD_BE_TRUTHY
+import tape.SHOULD_BE_FALSY
+import tape.SHOULD_BE_EQUAL
 
 fun constants(ok: OK): Boolean {
   ok(

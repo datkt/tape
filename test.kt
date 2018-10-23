@@ -1,18 +1,23 @@
-package ktape
+package tape
 
-import ktape.AssertionResult
+import tape.Stream
+import tape.AssertionResult
 
 /**
  * The 'Test' class represents a named test
  */
 class Test {
   private var callback: Callback?
+  private val stream: Stream
   private val ctx: Context
 
-  private var onBeforeRunCallbacks: Array<(Test) -> Unit> = emptyArray()
-  private var onAfterRunCallbacks: Array<(Test) -> Unit> = emptyArray()
-  private var onResultCallbacks: Array<(Test, AssertionResult) -> Unit> = emptyArray()
-  private var onTestCallbacks: Array<(Test) -> Unit> = emptyArray()
+  // runtime hooks
+  private var onBeforeRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
+  private var onAfterRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
+
+  // results
+  private var onResultCallbacks: Array<(Test, Any?) -> Unit?> = emptyArray()
+  private var onTestCallbacks: Array<(Test) -> Unit?> = emptyArray()
 
   public var planned: Int? = null
   public var ending: Boolean = false
@@ -21,12 +26,23 @@ class Test {
   /**
    * 'Test' class constructor.
    */
-  constructor(name: String?, skip: Boolean, callback: Callback?) {
+  constructor(
+    name: String?,
+    skip: Boolean,
+    callback: Callback?,
+    stream: Stream? = null
+  ) {
     this.ctx = Context(name, skip)
+    this.stream = if (null != stream) stream else Stream()
     this.callback = callback
   }
 
   fun onBeforeRun(callback: (Test) -> Unit?) {
+    this.onBeforeRunCallbacks += callback
+  }
+
+  fun onAfterRun(callback: (Test) -> Unit?) {
+    this.onAfterRunCallbacks += callback
   }
 
   /**
@@ -36,8 +52,22 @@ class Test {
   fun run(): Test {
     val callback: Callback? = this.callback
 
-    if (null != callback && true != this.ctx.skip) {
-      callback(this)
+    if (this.ctx.skip) {
+      this.comment("skip ${this.ctx.name}")
+    }
+
+    if (null == callback || this.ctx.skip) {
+      return this.end()
+    }
+
+    for (hook in this.onBeforeRunCallbacks) {
+      hook(this)
+    }
+
+    callback(this)
+
+    for (hook in this.onAfterRunCallbacks) {
+      hook(this)
     }
 
     return this
@@ -56,11 +86,14 @@ class Test {
   }
 
   /**
+   * Emit a comment
    */
   fun comment(comment: String): Test {
     val lines = comment.split("\n").toTypedArray()
     for (line in lines) {
-      println(line)
+      for (hook in this.onResultCallbacks) {
+        hook(this, line)
+      }
     }
     return this
   }

@@ -1,4 +1,4 @@
-ktape
+tape
 =====
 
 TAP [1] output producing test runner for Kotlin mostly ported from
@@ -9,46 +9,100 @@ course, from [source][#install-from-source]
 
 ## Installation
 
+The `tape` package an be installed with various package managers.
+
 ### From NPM
 
 ```sh
-$ npm install datkt/ktape
+$ npm install datkt/tape
 ```
 
-**Note:** *This will install **ktape** into `node_modules/ktape`*
+**Note:** *This will install **tape** into `node_modules/TAPE`*
 
 ### From clib
 
 ```sh
-$ clib install datkt/ktape
+$ clib install datkt/tape
 ```
 
-**Note:** *This will install **ktape** into `deps/ktape`*
+**Note:** *This will install **tape** into `deps/TAPE`*
 
 ### From GHI
 
 ```sh
-$ ghi install datkt/ktape
+$ ghi install datkt/tape
 ```
 
 ### Install From Source
 
 ```sh
-$ git clone git@github.com:datkt/ktape.git
-$ cd ktape
-$ make
+$ git clone git@github.com:datkt/tape.git
+$ cd tape
+$ make build # or make klib
 $ make install
 ```
+
+## Building
+
+The `tape` package can be built from source into various targets.
+
+### Kotlin Library
+
+`tape.klib`, a Kotlin library that can be linked with `konanc` can be
+built from source.
+
+```sh
+$ make klib
+```
+
+which will produce `build/lib/tape.klib`. The library can be installed
+with `klib` by running `make install`
+
+### Static Library
+
+`libtape.a`, a static library that can be linked with `konanc` can be
+built from source.
+
+```sh
+$ make static
+```
+
+which will produce `build/lib/libtape.a` and C header files in
+`build/include`. The library can be installed into your system by
+running `make install`. The path prefix can be set by defining the
+`PREFIX` environment or `make` variable. It defaults to
+`PREFIX=/usr/local`
+
+### Shared Library
+
+`libtape.so`, a shared library that can be linked with `konanc` can be
+built from source.
+
+```sh
+$ make shared
+```
+
+which will produce `build/lib/libtape.so` and C header files in
+`build/include`. The library can be installed into your system by
+running `make install`. The path prefix can be set by defining the
+`PREFIX` environment or `make` variable. It defaults to
+`PREFIX=/usr/local`
 
 ## Usage
 
 ```kotlin
-import ktape.*
+import tape.*
 import lerp.*
 
 fun main(args: Array<String>) {
   test("lerp(a, b, c)", fun(t: Test) {
-    // tests
+    val x = 1.0
+    val y = 2.0
+    val z = lerp(x, y, 1.0)
+
+    t.plan(1)
+    t.ok(1.0 == z, "lerp compute fail :shrug:")
+    t.end()
   })
 }
 ```

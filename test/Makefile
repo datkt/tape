@@ -1,7 +1,7 @@
 RM = rm -rf
 KCC ?= konanc
 
-LIB ?= ../build/lib/ktape
+LIB ?= ../build/lib/tape
 TEST ?= test.kexe
 
 TESTS += $(wildcard *.kt)
@@ -15,7 +15,7 @@ CLASSES += $(wildcard **/**/*.class)
 KCCFLAGS = -library $(LIB) -produce program -output $(TEST)
 
 .PHONY: default
-default: test test/c
+default: test
 
 .PHONY: test $(TESTS)
 test: $(TEST)

@@ -10,7 +10,7 @@ INSTALL ?= install
 OS ?= $(shell uname)
 SRC += *.kt
 TEST ?= test/
-NAME ?= ktape
+NAME ?= tape
 BUILD ?= build
 PREFIX ?= /usr/local
 SHARED_LIB_SUFFIX ?= so
@@ -18,7 +18,7 @@ ifeq ($(OS),Darwin)
 SHARED_LIB_SUFFIX = dylib
 endif
 
-INCLUDE += ktape.h
+INCLUDE += tape.h
 
 CLASSES += $(wildcard *.class)
 CLASSES += $(wildcard **/*.class)
@@ -40,24 +40,32 @@ if [ -f $(HEADER) ]; then $(MV) $(HEADER) $(BUILD)/include; fi
 $(CP) $(INCLUDE) $(BUILD)/include
 endef
 
+.PHONY: static shared klib framework
+
 build: $(STATIC_LIBRARY)
 build: $(SHARED_LIBRARY)
 build: $(KOTLIN_LIBRARY)
+
 ifeq ($(OS),Darwin)
 build: $(FRAMEWORK_LIBRARY)
+framework: $(FRAMEWORK_LIBRARY)
 endif
 
+static: $(STATIC_LIBRARY)
+shared: $(SHARED_LIBRARY)
+klib: $(KOTLIN_LIBRARY)
+
 install: build
-	$(INSTALL) $(STATIC_LIBRARY) $(SHARED_LIBRARY) $(PREFIX)/lib
-	$(INSTALL) $(INCLUDE) $(PREFIX)/include
-	$(KLIB) install $(KOTLIN_LIBRARY)
+	test -f $(STATIC_LIBRARY) && $(INSTALL) $(STATIC_LIBRARY) $(SHARED_LIBRARY) $(PREFIX)/lib
+	test -f $(INCLUDE) && $(INSTALL) $(INCLUDE) $(PREFIX)/include
+	test -f $(KLIB) && $(KLIB) install $(KOTLIN_LIBRARY)
 
 uninstall:
 	$(RM) $(PREFIX)/lib/lib$(NAME).{a,so,dylib}
-	$(RM) $(PREFIX)/include/ktape*
+	$(RM) $(PREFIX)/include/tape*
 
 clean:
-	$(RM) $(BUILD) $(CLASSES)
+	$(RM) $(BUILD) $(CLASSES) *.class
 	$(MAKE) $@ -C test
 
 .PHONY: test
@@ -80,7 +88,7 @@ $(FRAMEWORK_LIBRARY): $(SRC)
 endif
 
 $(KOTLIN_LIBRARY): $(SRC)
-	$(MKDIR) $(BUILD)/{include,lib}
+	$(MKDIR) $(BUILD)/lib
 	$(KCC) -output $(BUILD)/lib/$(NAME) -produce library $(SRC)
 
 $(foreach inc,$(INCLUDE), $(BUILD)/$(inc)): $(INCLUDE)

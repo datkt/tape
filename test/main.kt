@@ -1,3 +1,6 @@
+import kotlin.system.exitProcess
+
+// tests
 import test.assert
 import test.constants
 import test.context
@@ -5,6 +8,7 @@ import test.options
 import test.result
 import test.results
 import test.simple
+import test.stream
 import test.truthy
 
 const val TAP_VERSION = 13
@@ -18,6 +22,7 @@ val tests = listOf(
   ::result,
   ::results,
   ::simple,
+  ::stream,
   ::truthy
 )
 
@@ -29,7 +34,6 @@ var skips = 0
 fun main(args: Array<String>) {
   val count = tests.count()
 
-  println("")
   println(TAP_HEADER)
 
   for (i in 1..count) {
@@ -74,6 +78,10 @@ fun main(args: Array<String>) {
   println("# pass ${passed}")
   println("# fail ${failed}")
   println("")
+
+  if (failed > 0) {
+    exitProcess(1)
+  }
 }
 
 fun trim(s: String): String {

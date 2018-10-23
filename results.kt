@@ -1,6 +1,6 @@
-package ktape
+package tape
 
-import ktape.Test
+import tape.Test
 
 /**
  * The `Results` class represents a container for all

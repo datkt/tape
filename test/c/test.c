@@ -1,9 +1,9 @@
-#include <ktape.h>
 #include <ok/ok.h>
 #include <stdio.h>
+#include <tape.h>
 
 void
-test_hello(const KTapeTest *t) {
+test_hello(const TapeTest *t) {
   // @TODO
   printf("test_hello()\n");
   (void) t;
@@ -11,6 +11,6 @@ test_hello(const KTapeTest *t) {
 
 int
 main(void) {
-  ktape_test("hello", test_hello);
+  tape_test("hello", test_hello);
   return 0;
 }

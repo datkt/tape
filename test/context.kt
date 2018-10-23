@@ -2,8 +2,8 @@ package test
 
 import test.OK
 
-import ktape.Context
-import ktape.UNNAMED_TEST
+import tape.Context
+import tape.UNNAMED_TEST
 
 fun context(ok: OK): Boolean {
   // defaults

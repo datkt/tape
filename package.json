@@ -1,9 +1,9 @@
 {
-  "name": "ktape",
+  "name": "tape",
   "version": "0.0.1",
   "description": "TAP output producing test runner for Kotlin",
   "src": [
-    "include/ktape.h",
+    "include/tape.h",
     "assert.kt",
     "callback.kt",
     "constants.kt",
@@ -17,10 +17,11 @@
   ],
   "directories": {
     "include": "include/",
-    "ktape": "tape/"
+    "tape": "tape/"
   },
   "scripts": {
-    "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe | tap-markdown"
+    "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe",
+    "test-markdown": "npm test | tap-markdown"
   },
   "repository": {
     "type": "git",
@@ -43,5 +44,6 @@
   "homepage": "https://github.com/datkt/tape#readme",
   "devDependencies": {
     "@extendscripter/tap-markdown": "^1.3.1"
-  }
+  },
+  "dependencies": {}
 }

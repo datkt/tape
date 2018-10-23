@@ -1,4 +1,4 @@
-package ktape
+package tape
 
 /**
  * Default name for an unnamed test.

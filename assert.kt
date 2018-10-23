@@ -1,21 +1,23 @@
-package ktape
+package tape
 
 /**
- * Assert that something is "ok" with options.
+ * Assert that a value is "ok" with options.
  */
-fun assert(ctx: Context, ok: Any?, opts: AssertionOptions? = null): AssertionResult {
-  val value = truthy(ok)
-  var result = AssertionResult(ctx.asserts++, value)
+fun assert(
+  ctx: Context, value: Any?,
+  opts: AssertionOptions? = null
+): AssertionResult {
+  val ok = truthy(value)
+  val op = opts?.op
+  val skip = opts?.skip
+  val error = opts?.error
+  var result = AssertionResult(ctx.asserts++, ok)
+  val message = opts?.message
 
-  result.name = opts?.message
-  result.skip = opts?.skip
-  result.op = opts?.op
-
-  if (false == value) {
-    result.error =
-      if (truthy(opts?.error)) opts?.error
-      else opts?.message
-  }
+  result.error = if (truthy(error)) error else message
+  result.name = message
+  result.skip = skip
+  result.op = op
 
   return result
 }

@@ -1,9 +1,9 @@
 package test
 
 import test.OK
-import ktape.AssertionResult
-import ktape.UNNAMED_ASSERT
-import ktape.UNNAMED_OPERATOR
+import tape.AssertionResult
+import tape.UNNAMED_ASSERT
+import tape.UNNAMED_OPERATOR
 
 fun result(ok: OK): Boolean {
   val defaultResult = AssertionResult(123, true)
