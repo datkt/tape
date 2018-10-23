@@ -14,10 +14,13 @@ fun assert(
   var result = AssertionResult(ctx.asserts++, ok)
   val message = opts?.message
 
-  result.error = if (truthy(error)) error else message
-  result.name = message
+  if (!ok) {
+    result.error = if (truthy(error)) error else message
+  }
+
+  result.name = if (truthy(message)) message else result.name
   result.skip = skip
-  result.op = op
+  result.op = if (truthy(op)) op else result.op
 
   return result
 }

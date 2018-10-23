@@ -9,5 +9,5 @@ data class AssertionResult(
   var op: String? = UNNAMED_OPERATOR,
   var skip: Boolean? = false,
   var name: String? = UNNAMED_ASSERT,
-  var error: String? = null
+  var error: Any? = null
 )

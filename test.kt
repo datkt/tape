@@ -14,10 +14,10 @@ class Test {
   // runtime hooks
   private var onBeforeRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
   private var onAfterRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
-
-  // results
   private var onResultCallbacks: Array<(Test, Any?) -> Unit?> = emptyArray()
+  private var onPlanCallbacks: Array<(Test) -> Unit?> = emptyArray()
   private var onTestCallbacks: Array<(Test) -> Unit?> = emptyArray()
+  private var onEndCallbacks: Array<(Test) -> Unit?> = emptyArray()
 
   public var planned: Int? = null
   public var ending: Boolean = false
@@ -82,6 +82,11 @@ class Test {
     }
 
     this.planned = count
+
+    for (hook in this.onPlanCallbacks) {
+      hook(this)
+    }
+
     return this
   }
 
