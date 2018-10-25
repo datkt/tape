@@ -101,7 +101,7 @@ fun main(args: Array<String>) {
     val z = lerp(x, y, 1.0)
 
     t.plan(1)
-    t.ok(1.0 == z, "lerp compute fail :shrug:")
+    t.ok(2.0 == z, "lerp compute fail :shrug:")
     t.end()
   })
 }
