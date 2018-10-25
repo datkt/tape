@@ -1,14 +1,35 @@
 package tape
 
-import tape.Stream
+import kotlin.reflect.KClass
+
+import tape.truthy
+import tape.Context
+import tape.Callback
 import tape.AssertionResult
 
+import tape.UNNAMED_TEST
+
+import tape.SHOULD_THROW
+import tape.SHOULD_BE_EQUAL
+import tape.SHOULD_BE_FALSY
+import tape.SHOULD_BE_TRUTHY
+
+import tape.OK_OPERATOR
+import tape.FAIL_OPERATOR
+import tape.PASS_OPERATOR
+import tape.SKIP_OPERATOR
+import tape.EQUAL_OPERATOR
+import tape.THROWS_OPERATOR
+import tape.NOT_EQUAL_OPERATOR
+
 /**
- * The 'Test' class represents a named test
+ * The `Test` class represents a named test that is invoked in a
+ * function callback. When a test is running, it will call various
+ * function hooks and write TAP formatted output to a stream,
+ * defaulting to stdout * (`println`).
  */
-class Test {
+open class Test {
   private var callback: Callback?
-  private val stream: Stream
   private val ctx: Context
 
   // runtime hooks
@@ -16,38 +37,71 @@ class Test {
   private var onAfterRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
   private var onResultCallbacks: Array<(Test, Any?) -> Unit?> = emptyArray()
   private var onPlanCallbacks: Array<(Test) -> Unit?> = emptyArray()
-  private var onTestCallbacks: Array<(Test) -> Unit?> = emptyArray()
   private var onEndCallbacks: Array<(Test) -> Unit?> = emptyArray()
 
   public var planned: Int? = null
   public var ending: Boolean = false
   public var ended: Boolean = false
 
+  public val asserts: Int get() = this.ctx.asserts
+  public val name: String? get() = this.ctx.name
+  public val skip: Boolean get() = this.ctx.skip
+
   /**
    * 'Test' class constructor.
    */
   constructor(
-    name: String?,
-    skip: Boolean,
-    callback: Callback?,
-    stream: Stream? = null
+    name: String? = UNNAMED_TEST,
+    skip: Boolean? = false,
+    callback: Callback? = noop
   ) {
-    this.ctx = Context(name, skip)
-    this.stream = if (null != stream) stream else Stream()
+    this.ctx = Context(name, truthy(skip))
     this.callback = callback
   }
 
+  /**
+   * Add a callback that will be invoked before the test
+   * is ran.
+   */
   fun onBeforeRun(callback: (Test) -> Unit?) {
     this.onBeforeRunCallbacks += callback
   }
 
+  /**
+   * Add a callback that will be invoked after the test
+   * is ran.
+   */
   fun onAfterRun(callback: (Test) -> Unit?) {
     this.onAfterRunCallbacks += callback
   }
 
   /**
+   * Add a callback that will be invoked when there
+   * is a test result. It could be a `String` or `AssertionResult`.
+   */
+  fun onResult(callback: (Test, Any?) -> Unit?) {
+    this.onResultCallbacks += callback
+  }
+
+  /**
+   * Add a callback that will be invoked when a plan
+   * has been set.
+   */
+  fun onPlan(callback: (Test) -> Unit?) {
+    this.onPlanCallbacks += callback
+  }
+
+  /**
+   * Add a callback that will be invoked when the test
+   * has ended.
+   */
+  fun onEnd(callback: (Test) -> Unit?) {
+    this.onEndCallbacks += callback
+  }
+
+  /**
    * Runs the test runner invoking the runner callback
-   * given to the constuctor.
+   * given to the constructor.
    */
   fun run(): Test {
     val callback: Callback? = this.callback
@@ -148,7 +202,13 @@ class Test {
    * options.
    */
   fun assert(ok: Any?, opts: AssertionOptions? = null): AssertionResult {
-    return assert(this.ctx, ok, opts)
+    val result = assert(this.ctx, ok, opts)
+
+    for (hook in this.onResultCallbacks) {
+      hook(this, result)
+    }
+
+    return result
   }
 
   /**
@@ -164,7 +224,7 @@ class Test {
       expected = true.toString(),
       actual = ok.toString(),
       error = opts?.error,
-      skip = opts?.skip,
+      skip = truthy(opts?.skip),
       op = OK_OPERATOR,
       message =
         if (truthy(msg)) msg
@@ -177,7 +237,7 @@ class Test {
    * Asserts that input is "ok" based on some optional assertion
    * options.
    */
-  fun notok(
+  fun notOk(
     ok: Any?,
     msg: String? = null,
     opts: AssertionOptions? = null
@@ -186,7 +246,7 @@ class Test {
       expected = false.toString(),
       actual = ok.toString(),
       error = opts?.error,
-      skip = opts?.skip,
+      skip = truthy(opts?.skip),
       op = NOT_OK_OPERATOR,
       message =
         if (truthy(msg)) msg
@@ -203,9 +263,9 @@ class Test {
     msg: String? = null,
     opts: AssertionOptions? = null
   ): AssertionResult {
-    return this.assert(null != err, AssertionOptions(
+    return this.assert(!truthy(err), AssertionOptions(
       actual = err?.message,
-      skip = opts?.skip,
+      skip = truthy(opts?.skip),
       op = ERROR_OPERATOR,
       message =
         if (null != msg) msg
@@ -225,7 +285,7 @@ class Test {
       expected = opts?.expected,
       message = msg,
       actual = opts?.actual,
-      skip = opts?.skip,
+      skip = truthy(opts?.skip),
       op = FAIL_OPERATOR
     ))
   }
@@ -237,17 +297,17 @@ class Test {
     msg: String? = null,
     opts: AssertionOptions? = null
   ) : AssertionResult {
-    return this.assert(false, AssertionOptions(
+    return this.assert(true, AssertionOptions(
       expected = opts?.expected,
       message = msg,
       actual = opts?.actual,
-      skip = opts?.skip,
+      skip = truthy(opts?.skip),
       op = PASS_OPERATOR
     ))
   }
 
   /**
-   * Creates a skiping assertion with an optional message.
+   * Creates a skipping assertion with an optional message.
    */
   fun skip(
     msg: String? = null,
@@ -279,6 +339,56 @@ class Test {
       error = opts?.error,
       skip = true,
       op = EQUAL_OPERATOR
+    ))
+  }
+
+  fun throws(
+    fn: () -> Unit,
+    expected: Any? = null,
+    msg: String? = null,
+    opts: AssertionOptions? = AssertionOptions()
+  ): AssertionResult {
+    data class Caught(var error: Throwable? = null)
+    val caught = Caught()
+
+    if (expected is String) {
+      opts?.message = expected
+      opts?.expected = null
+    } else {
+      opts?.message = msg
+      opts?.expected = expected
+    }
+
+    try {
+      fn()
+    } catch (err: Throwable) {
+      caught.error = err
+    }
+
+    var passed = truthy(caught.error)
+
+    if (expected is String) {
+      if (passed) {
+        passed = expected == caught.error?.message
+      }
+    } else if (expected is Regex) {
+      if (passed) {
+        passed = expected.matches(caught.error.toString())
+      }
+
+      opts?.expected = expected.toString()
+    } else if (null != expected) {
+      if (passed) {
+        passed = (expected as KClass<*>).isInstance(caught.error)
+      }
+    }
+
+    return this.assert(passed, AssertionOptions(
+      expected = opts?.expected,
+      message = if (truthy(msg)) msg else SHOULD_THROW,
+      actual = if (truthy(caught.error)) caught.error.toString() else null,
+      error = caught.error,
+      op = THROWS_OPERATOR
     ))
   }
 }

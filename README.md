@@ -1,5 +1,5 @@
 tape
-=====
+====
 
 TAP [1] output producing test runner for Kotlin mostly ported from
 [@substack's](https://github.com/substack)
@@ -17,7 +17,7 @@ The `tape` package an be installed with various package managers.
 $ npm install datkt/tape
 ```
 
-**Note:** *This will install **tape** into `node_modules/TAPE`*
+**Note:** *This will install **tape** into `node_modules/tape`*
 
 ### From clib
 
@@ -25,7 +25,7 @@ $ npm install datkt/tape
 $ clib install datkt/tape
 ```
 
-**Note:** *This will install **tape** into `deps/TAPE`*
+**Note:** *This will install **tape** into `deps/tape`*
 
 ### From GHI
 
@@ -109,7 +109,9 @@ fun main(args: Array<String>) {
 
 ## API
 
-### `test(name: String, callback: (t: Test) -> Unit?)`
+The `tape` package exports a public API documented in this section.
+
+### `test(name: String, callback: (t: Test) -> Unit?): Test`
 
 Creates and returns a new named scoped test. The test callback
 will not be invoked if null is given.
@@ -122,7 +124,26 @@ test("function()", fun(t: Test) {
 })
 ```
 
-### `t.plan(count: Int): Test`
+### `class Test(name: String?, skip: Boolean, callback: Callback?, stream: Stream?)`
+
+The `Test` class represents a named test that is invoked in a
+function callback. When a test is running, it will call various function hooks
+and write TAP formatted output to a stream, defaulting to stdout
+(`println`).
+
+```kotlin
+t = Test("thing", false, fun(t: Test) {
+  t.end
+})
+
+t.run()
+```
+
+#### `t.onBeforeRun(callback: (Test) -> Unit?)`
+
+Add a callback that will be invoked before the test is ran.
+
+#### `t.plan(count: Int): Test`
 
 Ensure a planned assertion count for a test. Will throw `Error` if
 `count` is `0`.

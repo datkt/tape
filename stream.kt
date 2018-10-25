@@ -1,39 +1,49 @@
 package tape
 
 /**
- * A type alias for a print callback. This type alias
+ * A type alias for a writer callback. This type alias
  * describes a function signature equivalent to `println(Any?)`
  * built in to Kotlin
  */
-typealias PrintCallback = (Any?) -> Unit?
+typealias WriteCallback = (Any?) -> Unit?
+
+/**
+ * NO-OP writer stream writer function
+ */
+private fun noop(string: Any? = null) = string as Unit
 
 /**
  * The Stream class represents a wrapper around
- * an "endable" print stream.
+ * an "endable" writer stream.
  */
 class Stream {
-  var print: PrintCallback = ::println
+  var writer: WriteCallback = ::noop
   var ended: Boolean
 
   /**
    * Stream class constructor.
    */
-  constructor(print: PrintCallback? = null) {
+  constructor(writer: WriteCallback? = null) {
     this.ended = false
-    if (null != print) {
-      this.print = ::print
+    if (null != writer) {
+      this.writer = writer
     }
   }
 
   /**
    * Write output to the stream, if not ended.
    * This method will return `true` upon a succesful
-   * print such that the stream has not ended, otherwise
-   * it will return `false`.
+   * writer such that the stream has not ended, otherwise
+   * it will return `false`. If `null` is given, it will
+   * "end" the stream.
    */
-  fun write(output: Any? = null): Boolean {
+  fun write(output: Any?): Boolean {
+    if (null == output) {
+      return this.end()
+    }
+
     if (true != this.ended) {
-      this.print(output)
+      this.writer(output)
       return true
     }
 

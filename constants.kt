@@ -23,7 +23,7 @@ val OK_OPERATOR = "ok"
 /**
  * Operator name for an not ok test or general tests
  */
-val NOT_OK_OPERATOR = "not ok"
+val NOT_OK_OPERATOR = "notOk"
 
 /**
  * Operator name for failed test or general test runner
@@ -38,7 +38,7 @@ val FAIL_OPERATOR = "fail"
 val PASS_OPERATOR = "pass"
 
 /**
- * Operator name for skiped test or general test runner
+ * Operator name for skipped test or general test runner
  * skips.
  */
 val SKIP_OPERATOR = "skip"
@@ -55,16 +55,31 @@ val ERROR_OPERATOR = "error"
 val EQUAL_OPERATOR = "equal"
 
 /**
- * Truthy error message string.
+ * Operator name for an exception test.
+ */
+val THROWS_OPERATOR = "throws"
+
+/**
+ * Operator name for inequality test.
+ */
+val NOT_EQUAL_OPERATOR = "notEqual"
+
+/**
+ * Truthy assertion message string.
  */
 val SHOULD_BE_TRUTHY = "should be truthy"
 
 /**
- * Falsy error message string.
+ * Falsy assertion message string.
  */
 val SHOULD_BE_FALSY = "should be falsy"
 
 /**
- * Equality error message string.
+ * Equality assertion message string.
  */
 val SHOULD_BE_EQUAL = "should be equal"
+
+/**
+ * Exception assertion message string.
+ */
+val SHOULD_THROW = "should throw"

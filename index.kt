@@ -1,8 +1,8 @@
 package tape
 
-import tape.Callback
-import tape.Results
 import tape.Test
+import tape.Results
+import tape.Callback
 
 private var results: Results? = null
 
@@ -53,4 +53,14 @@ fun skip(name: String, callback: Callback? = null): Test {
     t.run()
   }
   return t
+}
+
+/**
+ * Closes results container and writes results to underlying
+ * write stream.
+ */
+fun collect(): Results? {
+  results?.collect()
+  results?.close()
+  return results
 }

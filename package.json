@@ -20,8 +20,8 @@
     "tape": "tape/"
   },
   "scripts": {
-    "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe",
-    "test-markdown": "npm test | tap-markdown"
+    "tests": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe",
+    "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe | tap-markdown"
   },
   "repository": {
     "type": "git",

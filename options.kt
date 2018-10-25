@@ -5,9 +5,9 @@ package tape
  */
 data class AssertionOptions(
   var op: String? = UNNAMED_OPERATOR,
-  var skip: Boolean? = false,
+  var skip: Boolean = false,
   var error: Any? = null,
-  var actual: String? = null,
+  var actual: Any? = null,
   var message: String? = UNNAMED_ASSERT,
-  var expected: String? = null
+  var expected: Any? = null
 )

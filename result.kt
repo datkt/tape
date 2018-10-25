@@ -7,7 +7,9 @@ data class AssertionResult(
   val id: Int,
   val ok: Boolean,
   var op: String? = UNNAMED_OPERATOR,
-  var skip: Boolean? = false,
+  var skip: Boolean = false,
   var name: String? = UNNAMED_ASSERT,
-  var error: Any? = null
+  var error: Any? = null,
+  var actual: Any? = null,
+  var expected: Any? = null
 )

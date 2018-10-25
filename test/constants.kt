@@ -38,8 +38,8 @@ fun constants(ok: OK): Boolean {
   )
 
   ok(
-    NOT_OK_OPERATOR == "not ok",
-    "NOT_OK_OPERATOR == \"not ok\""
+    NOT_OK_OPERATOR == "notOk",
+    "NOT_OK_OPERATOR == \"notOk\""
   )
 
   ok(

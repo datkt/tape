@@ -9,6 +9,7 @@ import test.result
 import test.results
 import test.simple
 import test.stream
+import test.test
 import test.truthy
 
 const val TAP_VERSION = 13
@@ -23,6 +24,7 @@ val tests = listOf(
   ::results,
   ::simple,
   ::stream,
+  ::test,
   ::truthy
 )
 
@@ -76,7 +78,13 @@ fun main(args: Array<String>) {
   println("# tests ${asserts}")
   println("# skips ${skips}")
   println("# pass ${passed}")
-  println("# fail ${failed}")
+
+  if (failed > 0) {
+    println("# fail ${failed}")
+  } else {
+    println("# ok")
+  }
+
   println("")
 
   if (failed > 0) {

@@ -1,4 +1,4 @@
-let NERDTreeIgnore = [ 'META-INF', '\.class$' ]
+let NERDTreeIgnore = [ 'META-INF', '\.class$', 'tape/' ]
 
 let g:syntastic_kotlin_kotlinc_options = [ ]
 let g:syntastic_kotlin_kotlinc_sourcepath = './'
