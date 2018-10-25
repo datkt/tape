@@ -337,7 +337,6 @@ open class Test {
       message = if (truthy(msg)) msg else SHOULD_BE_EQUAL,
       actual = a?.toString(),
       error = opts?.error,
-      skip = true,
       op = EQUAL_OPERATOR
     ))
   }
