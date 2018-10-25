@@ -1,6 +1,6 @@
 {
   "name": "tape",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "TAP output producing test runner for Kotlin",
   "src": [
     "assert.kt",
@@ -22,8 +22,7 @@
     "test.kt",
     "truthy.kt"
   ],
-  "directories": {
-  },
+  "directories": {},
   "scripts": {
     "tests": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe",
     "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe | tap-markdown",
