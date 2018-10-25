@@ -90,6 +90,7 @@ endif
 $(KOTLIN_LIBRARY): $(SRC)
 	$(MKDIR) $(BUILD)/lib
 	$(KCC) -output $(BUILD)/lib/$(NAME) -produce library $(SRC)
+	$(CP) $(KOTLIN_LIBRARY) .
 
 $(foreach inc,$(INCLUDE), $(BUILD)/$(inc)): $(INCLUDE)
 	$(CP) $< $@

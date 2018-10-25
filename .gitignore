@@ -28,3 +28,4 @@ META-INF/
 test/c/test
 *.o
 node_modules/
+tape.klib

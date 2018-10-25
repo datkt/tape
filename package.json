@@ -3,25 +3,31 @@
   "version": "0.2.0",
   "description": "TAP output producing test runner for Kotlin",
   "src": [
-    "include/tape.h",
     "assert.kt",
     "callback.kt",
     "constants.kt",
     "context.kt",
+    "index.kt",
+    "LICENSE",
+    "Makefile",
     "noop.kt",
     "options.kt",
-    "package.kt",
+    "package.json",
+    "README.md",
     "result.kt",
+    "results.kt",
+    "stream.kt",
+    "tape.def",
+    "tape.h",
     "test.kt",
     "truthy.kt"
   ],
   "directories": {
-    "include": "include/",
-    "tape": "tape/"
   },
   "scripts": {
     "tests": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe",
-    "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe | tap-markdown"
+    "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe | tap-markdown",
+    "postinstall": "konanc . -output tape -produce library"
   },
   "repository": {
     "type": "git",
