@@ -26,7 +26,7 @@
   "scripts": {
     "tests": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe",
     "test": "NPM=1 make test 2>&1>/dev/null && ./test/test.kexe | tap-markdown",
-    "postinstall": "konanc . -output tape -produce library"
+    "postinstall": "konanc *.kt -output tape -produce library"
   },
   "repository": {
     "type": "git",
