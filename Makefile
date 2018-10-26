@@ -63,6 +63,7 @@ install: build
 uninstall:
 	$(RM) $(PREFIX)/lib/lib$(NAME).{a,so,dylib}
 	$(RM) $(PREFIX)/include/tape*
+	$(KLIB) remove $(NAME)
 
 clean:
 	$(RM) $(BUILD) $(CLASSES) *.class
