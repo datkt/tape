@@ -1,26 +1,26 @@
-package tape
+package datkt.tape
 
 import kotlin.reflect.KClass
 
-import tape.truthy
-import tape.Context
-import tape.Callback
-import tape.AssertionResult
+import datkt.tape.truthy
+import datkt.tape.Context
+import datkt.tape.Callback
+import datkt.tape.AssertionResult
 
-import tape.UNNAMED_TEST
+import datkt.tape.UNNAMED_TEST
 
-import tape.SHOULD_THROW
-import tape.SHOULD_BE_EQUAL
-import tape.SHOULD_BE_FALSY
-import tape.SHOULD_BE_TRUTHY
+import datkt.tape.SHOULD_THROW
+import datkt.tape.SHOULD_BE_EQUAL
+import datkt.tape.SHOULD_BE_FALSY
+import datkt.tape.SHOULD_BE_TRUTHY
 
-import tape.OK_OPERATOR
-import tape.FAIL_OPERATOR
-import tape.PASS_OPERATOR
-import tape.SKIP_OPERATOR
-import tape.EQUAL_OPERATOR
-import tape.THROWS_OPERATOR
-import tape.NOT_EQUAL_OPERATOR
+import datkt.tape.OK_OPERATOR
+import datkt.tape.FAIL_OPERATOR
+import datkt.tape.PASS_OPERATOR
+import datkt.tape.SKIP_OPERATOR
+import datkt.tape.EQUAL_OPERATOR
+import datkt.tape.THROWS_OPERATOR
+import datkt.tape.NOT_EQUAL_OPERATOR
 
 /**
  * The `Test` class represents a named test that is invoked in a

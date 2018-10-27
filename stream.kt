@@ -1,4 +1,4 @@
-package tape
+package datkt.tape
 
 /**
  * A type alias for a writer callback. This type alias

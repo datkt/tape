@@ -1,20 +1,20 @@
-package test
+package datkt.tape.test
 
-import test.OK
+import datkt.tape.test.OK
 
-import tape.UNNAMED_TEST
-import tape.UNNAMED_ASSERT
-import tape.UNNAMED_OPERATOR
-import tape.OK_OPERATOR
-import tape.NOT_OK_OPERATOR
-import tape.FAIL_OPERATOR
-import tape.PASS_OPERATOR
-import tape.SKIP_OPERATOR
-import tape.ERROR_OPERATOR
-import tape.EQUAL_OPERATOR
-import tape.SHOULD_BE_TRUTHY
-import tape.SHOULD_BE_FALSY
-import tape.SHOULD_BE_EQUAL
+import datkt.tape.UNNAMED_TEST
+import datkt.tape.UNNAMED_ASSERT
+import datkt.tape.UNNAMED_OPERATOR
+import datkt.tape.OK_OPERATOR
+import datkt.tape.NOT_OK_OPERATOR
+import datkt.tape.FAIL_OPERATOR
+import datkt.tape.PASS_OPERATOR
+import datkt.tape.SKIP_OPERATOR
+import datkt.tape.ERROR_OPERATOR
+import datkt.tape.EQUAL_OPERATOR
+import datkt.tape.SHOULD_BE_TRUTHY
+import datkt.tape.SHOULD_BE_FALSY
+import datkt.tape.SHOULD_BE_EQUAL
 
 fun constants(ok: OK): Boolean {
   ok(

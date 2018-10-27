@@ -27,7 +27,7 @@ extern "C" {
 #define kotlin TAPE_symbols()->kotlin.root
 #endif
 
-#define TAPE_KREF(T) tape_kref_ ## t
+#define TAPE_KREF(T) tape_kref_datkt_ ## t
 
 #define TAPE_CLASS(T) TAPE_KREF(tape_##T)
 

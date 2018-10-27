@@ -1,4 +1,4 @@
-package tape
+package datkt.tape
 
 /**
  * Default name for an unnamed test.

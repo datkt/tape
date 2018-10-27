@@ -1,16 +1,16 @@
 import kotlin.system.exitProcess
 
 // tests
-import test.assert
-import test.constants
-import test.context
-import test.options
-import test.result
-import test.results
-import test.simple
-import test.stream
-import test.test
-import test.truthy
+import datkt.tape.test.assert
+import datkt.tape.test.constants
+import datkt.tape.test.context
+import datkt.tape.test.options
+import datkt.tape.test.result
+import datkt.tape.test.results
+import datkt.tape.test.simple
+import datkt.tape.test.stream
+import datkt.tape.test.test
+import datkt.tape.test.truthy
 
 const val TAP_VERSION = 13
 const val TAP_HEADER = "TAP version ${TAP_VERSION}"

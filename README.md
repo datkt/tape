@@ -14,10 +14,10 @@ The `tape` package an be installed with various package managers.
 ### From NPM
 
 ```sh
-$ npm install datkt/tape
+$ npm install @datkt/tape
 ```
 
-**Note:** *This will install **tape** into `node_modules/tape`*
+**Note:** *This will install **tape** into `node_modules/@datkt/tape`*
 
 ### From clib
 
@@ -42,51 +42,25 @@ $ make build # or make klib
 $ make install
 ```
 
-## Building
+## Compiling
 
-The `tape` package can be built from source into various targets.
-
-### Kotlin Library
-
-`tape.klib`, a Kotlin library that can be linked with `konanc` can be
-built from source.
+### From NPM Installation
 
 ```sh
-$ make klib
+$ konanc -r node_modules/@datkt/tape -l tape test.kt -o test
 ```
 
-which will produce `build/lib/tape.klib`. The library can be installed
-with `klib` by running `make install`
-
-### Static Library
-
-`libtape.a`, a static library that can be linked with `konanc` can be
-built from source.
+### From clib Installation
 
 ```sh
-$ make static
+$ konanc deps/@datkt/tape/*.kt test.kt -o test
 ```
 
-which will produce `build/lib/libtape.a` and C header files in
-`build/include`. The library can be installed into your system by
-running `make install`. The path prefix can be set by defining the
-`PREFIX` environment or `make` variable. It defaults to
-`PREFIX=/usr/local`
-
-### Shared Library
-
-`libtape.so`, a shared library that can be linked with `konanc` can be
-built from source.
+### From Source Installation
 
 ```sh
-$ make shared
+$ konanc -l tape test.kt -o test ## library should be installed in ~/.konan/klib
 ```
-
-which will produce `build/lib/libtape.so` and C header files in
-`build/include`. The library can be installed into your system by
-running `make install`. The path prefix can be set by defining the
-`PREFIX` environment or `make` variable. It defaults to
-`PREFIX=/usr/local`
 
 ## Usage
 
@@ -147,6 +121,52 @@ Add a callback that will be invoked before the test is ran.
 
 Ensure a planned assertion count for a test. Will throw `Error` if
 `count` is `0`.
+
+## Building
+
+The `tape` package can be built from source into various targets.
+
+### Kotlin Library
+
+`tape.klib`, a Kotlin library that can be linked with `konanc` can be
+built from source.
+
+```sh
+$ make klib
+```
+
+which will produce `build/lib/tape.klib`. The library can be installed
+with `klib` by running `make install`
+
+### Static Library
+
+`libtape.a`, a static library that can be linked with `konanc` can be
+built from source.
+
+```sh
+$ make static
+```
+
+which will produce `build/lib/libtape.a` and C header files in
+`build/include`. The library can be installed into your system by
+running `make install`. The path prefix can be set by defining the
+`PREFIX` environment or `make` variable. It defaults to
+`PREFIX=/usr/local`
+
+### Shared Library
+
+`libtape.so`, a shared library that can be linked with `konanc` can be
+built from source.
+
+```sh
+$ make shared
+```
+
+which will produce `build/lib/libtape.so` and C header files in
+`build/include`. The library can be installed into your system by
+running `make install`. The path prefix can be set by defining the
+`PREFIX` environment or `make` variable. It defaults to
+`PREFIX=/usr/local`
 
 ## References
 

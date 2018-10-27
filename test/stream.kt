@@ -1,7 +1,7 @@
-package test
+package datkt.tape.test
 
-import test.OK
-import tape.Stream
+import datkt.tape.test.OK
+import datkt.tape.Stream
 
 fun stream(ok: OK): Boolean {
   var written = ""

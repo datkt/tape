@@ -1,7 +1,7 @@
-package test
+package datkt.tape.test
 
-import test.OK
-import tape.Results
+import datkt.tape.test.OK
+import datkt.tape.Results
 
 fun results(ok: OK): Boolean {
   ok(null, null)

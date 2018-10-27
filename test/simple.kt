@@ -1,8 +1,8 @@
-package test
+package datkt.tape.test
 
-import test.OK
-import tape.skip
-import tape.test
+import datkt.tape.test.OK
+import datkt.tape.skip
+import datkt.tape.test
 
 fun simple(ok: OK): Boolean {
   var calls = 0

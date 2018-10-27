@@ -1,7 +1,7 @@
-package tape
+package datkt.tape
 
-import tape.Test
-import tape.Stream
+import datkt.tape.Test
+import datkt.tape.Stream
 
 /**
  * The `Results` class represents a container for all

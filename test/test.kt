@@ -1,20 +1,20 @@
-package test
+package datkt.tape.test
 
-import test.OK
+import datkt.tape.test.OK
 
-import tape.Test
-import tape.UNNAMED_TEST
+import datkt.tape.Test
+import datkt.tape.UNNAMED_TEST
 
-import tape.OK_OPERATOR
-import tape.FAIL_OPERATOR
-import tape.PASS_OPERATOR
-import tape.SKIP_OPERATOR
-import tape.EQUAL_OPERATOR
-import tape.ERROR_OPERATOR
-import tape.THROWS_OPERATOR
-import tape.NOT_OK_OPERATOR
-import tape.UNNAMED_OPERATOR
-import tape.NOT_EQUAL_OPERATOR
+import datkt.tape.OK_OPERATOR
+import datkt.tape.FAIL_OPERATOR
+import datkt.tape.PASS_OPERATOR
+import datkt.tape.SKIP_OPERATOR
+import datkt.tape.EQUAL_OPERATOR
+import datkt.tape.ERROR_OPERATOR
+import datkt.tape.THROWS_OPERATOR
+import datkt.tape.NOT_OK_OPERATOR
+import datkt.tape.UNNAMED_OPERATOR
+import datkt.tape.NOT_EQUAL_OPERATOR
 
 fun test(ok: OK): Boolean {
   var t: Test

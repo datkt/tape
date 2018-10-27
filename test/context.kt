@@ -1,9 +1,9 @@
-package test
+package datkt.tape.test
 
-import test.OK
+import datkt.tape.test.OK
 
-import tape.Context
-import tape.UNNAMED_TEST
+import datkt.tape.Context
+import datkt.tape.UNNAMED_TEST
 
 fun context(ok: OK): Boolean {
   // defaults

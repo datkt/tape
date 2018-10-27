@@ -1,9 +1,9 @@
-package test
+package datkt.tape.test
 
-import test.OK
-import tape.AssertionOptions
-import tape.UNNAMED_OPERATOR
-import tape.UNNAMED_ASSERT
+import datkt.tape.test.OK
+import datkt.tape.AssertionOptions
+import datkt.tape.UNNAMED_OPERATOR
+import datkt.tape.UNNAMED_ASSERT
 
 fun options(ok: OK): Boolean {
   val defaultOptions = AssertionOptions()

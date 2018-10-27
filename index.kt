@@ -1,8 +1,8 @@
-package tape
+package datkt.tape
 
-import tape.Test
-import tape.Results
-import tape.Callback
+import datkt.tape.Test
+import datkt.tape.Results
+import datkt.tape.Callback
 
 private var results: Results? = null
 
