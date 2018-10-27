@@ -238,7 +238,7 @@ open class Test {
   }
 
   /**
-   * Asserts that input is "ok" based on some optional assertion
+   * Asserts that input is "not ok" based on some optional assertion
    * options.
    */
   fun notOk(
@@ -260,20 +260,21 @@ open class Test {
   }
 
   /**
-   * Asserts that an error is given with an optional message.
+   * Asserts that an error is falsy. If an error is given
+   * the message is used in the assertion.
    */
   fun error(
-    err: Error? = null,
+    err: Any? = null,
     msg: String? = null,
     opts: AssertionOptions? = null
   ): AssertionResult {
     return this.assert(!truthy(err), AssertionOptions(
-      actual = err?.message,
+      actual = if (err is Error) err.message else null,
       skip = truthy(opts?.skip),
       op = ERROR_OPERATOR,
       message =
         if (null != msg) msg
-        else if (null != err) err.message
+        else if (err is Error) err.message
         else null
     ))
   }
@@ -345,6 +346,10 @@ open class Test {
     ))
   }
 
+  /**
+   * Creates an assertion that checks for an error to be thrown
+   * inside of a given function.
+   */
   fun throws(
     fn: () -> Unit,
     expected: Any? = null,
