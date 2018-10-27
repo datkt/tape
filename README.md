@@ -1,5 +1,5 @@
-tape
-====
+datkt.tape
+==========
 
 TAP [1] output producing test runner for Kotlin mostly ported from
 [@substack's](https://github.com/substack)
@@ -9,7 +9,7 @@ course, from [source][#install-from-source]
 
 ## Installation
 
-The `tape` package an be installed with various package managers.
+The `datkt.tape` package an be installed with various package managers.
 
 ### From NPM
 
@@ -47,7 +47,7 @@ $ make install
 ### From NPM Installation
 
 ```sh
-$ konanc -r node_modules/@datkt/tape -l tape test.kt -o test
+$ konanc -r node_modules/@datkt -l tape/tape test.kt -o test
 ```
 
 ### From clib Installation
@@ -370,6 +370,28 @@ running `make install`. The path prefix can be set by defining the
 `PREFIX` environment or `make` variable. It defaults to
 `PREFIX=/usr/local`
 
+## Tests
+
+- ✔ assert [pass: 21, fail: 0, duration: 0ms]
+- ✔ constants [pass: 13, fail: 0, duration: 0ms]
+- ✔ context [pass: 6, fail: 0, duration: 0ms]
+- ✔ options [pass: 6, fail: 0, duration: 0ms]
+- ✔ result [pass: 5, fail: 0, duration: 0ms]
+- ✔ results [pass: 0, fail: 0, duration: 1ms]
+- ✔ simple [pass: 0, fail: 0, duration: 0ms]
+- ✔ simple [pass: 2, fail: 0, duration: 0ms]
+- ✔ stream [pass: 8, fail: 0, duration: 0ms]
+- ✔ test [pass: 36, fail: 0, duration: 0ms]
+- ✔ truthy [pass: 11, fail: 0, duration: 3ms]
+
+### Summary
+
+- duration: 4ms
+- planned: 108
+- assertions: 108
+- pass: 108
+- fail: 0
+
 ## References
 
 1. TAP - https://en.wikipedia.org/wiki/Test_Anything_Protocol
@@ -378,3 +400,7 @@ running `make install`. The path prefix can be set by defining the
 4. IMS - https://github.com/mafintosh/ims
 5. clib - https://github.com/clibs/clib
 6. GHI - https://github.com/stephenmathieson/ghi
+
+## License
+
+MIT
