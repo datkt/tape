@@ -65,7 +65,8 @@ $ konanc -l tape test.kt -o test ## library should be installed in ~/.konan/klib
 ## Usage
 
 ```kotlin
-import tape.*
+import datkt.tape.collect
+import datkt.tape.test
 import lerp.*
 
 fun main(args: Array<String>) {
@@ -78,6 +79,8 @@ fun main(args: Array<String>) {
     t.ok(2.0 == z, "lerp compute fail :shrug:")
     t.end()
   })
+
+  collect() // collects results and prints to stdout
 }
 ```
 
