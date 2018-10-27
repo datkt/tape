@@ -36,7 +36,7 @@ open class Test {
   private var onBeforeRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
   private var onAfterRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
   private var onResultCallbacks: Array<(Test, Any?) -> Unit?> = emptyArray()
-  private var onPlanCallbacks: Array<(Test) -> Unit?> = emptyArray()
+  private var onPlanCallbacks: Array<(Test, Int?) -> Unit?> = emptyArray()
   private var onEndCallbacks: Array<(Test) -> Unit?> = emptyArray()
 
   public var planned: Int? = null
@@ -87,7 +87,7 @@ open class Test {
    * Add a callback that will be invoked when a plan
    * has been set.
    */
-  fun onPlan(callback: (Test) -> Unit?) {
+  fun onPlan(callback: (Test, Int?) -> Unit?) {
     this.onPlanCallbacks += callback
   }
 
@@ -138,7 +138,7 @@ open class Test {
     this.planned = count
 
     for (hook in this.onPlanCallbacks) {
-      hook(this)
+      hook(this, this.planned)
     }
 
     return this
@@ -188,6 +188,10 @@ open class Test {
           actual = asserts.toString(),
           expected = planned.toString()
         ))
+      } else {
+        for (hook in this.onEndCallbacks) {
+          hook(this)
+        }
       }
 
       this.ending = false
