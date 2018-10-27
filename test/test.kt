@@ -110,10 +110,33 @@ fun test(ok: OK): Boolean {
   t.run()
   ok(true == called, "test callback called after t.run()")
 
-  Test(callback = fun (t: Test) {
+  var ended = false
+  t = Test(callback = fun (t: Test) {
+    t.plan(1)
+    t.ok(true)
+    t.comment("comment")
     t.end()
     ok(true == t.ended, "t.ended is true after t.end()")
-  }).run()
+  })
+
+  t.onPlan(fun(_, plan: Int?) {
+    ok(1 == plan, "1 == plan")
+  })
+
+  t.onEnd(fun(_) { ended = true })
+
+  t.onResult(fun(_, result: Any?) {
+    if (result is datkt.tape.AssertionResult) {
+      ok(result.ok, "true == result.ok when result is AssertionResult")
+    }
+
+    if (result is String) {
+      ok("comment" == result, "result == comment when result is String")
+    }
+  })
+
+  t.run()
+  ok(true == ended, "true == ended")
 
   return true
 }
