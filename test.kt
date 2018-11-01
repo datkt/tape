@@ -111,7 +111,8 @@ open class Test {
     }
 
     if (null == callback || this.ctx.skip) {
-      return this.end()
+      this.end()
+      return this
     }
 
     for (hook in this.onBeforeRunCallbacks) {
