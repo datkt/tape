@@ -161,7 +161,7 @@ open class Test {
    * Ends the test runner with an optional error that
    * will generate an error assertion.
    */
-  fun end(err: Error? = null): Test {
+  fun end(err: Error? = null) {
     if (null != err) {
       this.error(err)
     }
@@ -197,8 +197,6 @@ open class Test {
       this.ending = false
       this.ended = true
     }
-
-    return this
   }
 
   /**
