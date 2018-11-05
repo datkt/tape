@@ -1,5 +1,0 @@
-Name: tape
-Description: TAP output producing test runner for Kotlin
-Version: 0.5
-
-Libs: -r node_modules/@datkt/tape -l tape
