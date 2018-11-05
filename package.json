@@ -1,6 +1,6 @@
 {
   "name": "@datkt/tape",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "TAP output producing test runner for Kotlin",
   "src": [
     "assert.kt",
