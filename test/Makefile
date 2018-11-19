@@ -1,7 +1,7 @@
 RM = rm -rf
 KCC ?= konanc
 
-LIB ?= ../build/lib/tape
+LIB ?= ../*.klib
 TEST ?= test.kexe
 
 TESTS += $(wildcard *.kt)

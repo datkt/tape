@@ -88,7 +88,7 @@ fun main(args: Array<String>) {
 
 The `datkt.tape` package exports a public API documented in this section.
 
-### `test(name: String, callback: (t: Test) -> Unit?): Test`
+### `test(name: String, callback: (t: Test) -> Any?): Test`
 
 Creates and returns a new named scoped test. The test callback
 will not be invoked if null is given.
@@ -138,7 +138,7 @@ t = Test("thing", false, fun(t: Test) {
 t.run()
 ```
 
-#### `t.onBeforeRun(callback: (Test) -> Unit?)`
+#### `t.onBeforeRun(callback: (Test) -> Any?)`
 
 Add a callback that will be invoked before the test is ran.
 
@@ -148,7 +148,7 @@ t.onBeforeRun({
 })
 ```
 
-#### `t.onAfterRun(callback: (Test) -> Unit?)`
+#### `t.onAfterRun(callback: (Test) -> Any?)`
 
 Add a callback that will be invoked after the test is ran.
 
@@ -158,7 +158,7 @@ t.onAferRun({
 })
 ```
 
-#### `t.onResult(callback: (Test, Any?) -> Unit?)`
+#### `t.onResult(callback: (Test, Any?) -> Any?)`
 
 Add a callback that will be invoked when there
 is a test result. It could be a `String` or `AssertionResult`.
@@ -173,7 +173,7 @@ t.onResult(fun(_, result: Any?) {
 })
 ```
 
-#### `t.onPlan(callback: (Test, Int?) -> Unit?)`
+#### `t.onPlan(callback: (Test, Int?) -> Any?)`
 
 Add a callback that will be invoked when a plan
 has been set.
@@ -186,7 +186,7 @@ t.onPlan(fun(_, plan: Int?) {
 })
 ```
 
-#### `t.onEnd(callback: (Test) -> Unit?)`
+#### `t.onEnd(callback: (Test) -> Any?)`
 
 Add a callback that will be invoked when the test
 has ended.

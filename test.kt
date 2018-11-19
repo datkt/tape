@@ -33,11 +33,11 @@ open class Test {
   private val ctx: Context
 
   // runtime hooks
-  private var onBeforeRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
-  private var onAfterRunCallbacks: Array<(Test) -> Unit?> = emptyArray()
-  private var onResultCallbacks: Array<(Test, Any?) -> Unit?> = emptyArray()
-  private var onPlanCallbacks: Array<(Test, Int?) -> Unit?> = emptyArray()
-  private var onEndCallbacks: Array<(Test) -> Unit?> = emptyArray()
+  private var onBeforeRunCallbacks: Array<(Test) -> Any?> = emptyArray()
+  private var onAfterRunCallbacks: Array<(Test) -> Any?> = emptyArray()
+  private var onResultCallbacks: Array<(Test, Any?) -> Any?> = emptyArray()
+  private var onPlanCallbacks: Array<(Test, Int?) -> Any?> = emptyArray()
+  private var onEndCallbacks: Array<(Test) -> Any?> = emptyArray()
 
   public var planned: Int? = null
   public var ending: Boolean = false
@@ -63,7 +63,7 @@ open class Test {
    * Add a callback that will be invoked before the test
    * is ran.
    */
-  fun onBeforeRun(callback: (Test) -> Unit?) {
+  fun onBeforeRun(callback: (Test) -> Any?) {
     this.onBeforeRunCallbacks += callback
   }
 
@@ -71,7 +71,7 @@ open class Test {
    * Add a callback that will be invoked after the test
    * is ran.
    */
-  fun onAfterRun(callback: (Test) -> Unit?) {
+  fun onAfterRun(callback: (Test) -> Any?) {
     this.onAfterRunCallbacks += callback
   }
 
@@ -79,7 +79,7 @@ open class Test {
    * Add a callback that will be invoked when there
    * is a test result. It could be a `String` or `AssertionResult`.
    */
-  fun onResult(callback: (Test, Any?) -> Unit?) {
+  fun onResult(callback: (Test, Any?) -> Any?) {
     this.onResultCallbacks += callback
   }
 
@@ -87,7 +87,7 @@ open class Test {
    * Add a callback that will be invoked when a plan
    * has been set.
    */
-  fun onPlan(callback: (Test, Int?) -> Unit?) {
+  fun onPlan(callback: (Test, Int?) -> Any?) {
     this.onPlanCallbacks += callback
   }
 
@@ -95,7 +95,7 @@ open class Test {
    * Add a callback that will be invoked when the test
    * has ended.
    */
-  fun onEnd(callback: (Test) -> Unit?) {
+  fun onEnd(callback: (Test) -> Any?) {
     this.onEndCallbacks += callback
   }
 
@@ -350,7 +350,7 @@ open class Test {
    * inside of a given function.
    */
   fun throws(
-    fn: () -> Unit,
+    fn: () -> Any?,
     expected: Any? = null,
     msg: String? = null,
     opts: AssertionOptions? = AssertionOptions()

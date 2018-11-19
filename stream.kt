@@ -5,12 +5,12 @@ package datkt.tape
  * describes a function signature equivalent to `println(Any?)`
  * built in to Kotlin
  */
-typealias WriteCallback = (Any?) -> Unit?
+typealias WriteCallback = (Any?) -> Any?
 
 /**
  * NO-OP writer stream writer function
  */
-private fun noop(string: Any? = null) = string as Unit
+private fun noop(string: Any? = null) = string as Any
 
 /**
  * The Stream class represents a wrapper around

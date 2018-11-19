@@ -2,7 +2,7 @@ package datkt.tape.test
 
 val emptyStrings: Array<String> = emptyArray()
 
-fun truthy(ok: (Boolean?, String?) -> Unit?): Boolean {
+fun truthy(ok: (Boolean?, String?) -> Any?): Boolean {
   ok(datkt.tape.truthy(1), "truthy(1)")
   ok(datkt.tape.truthy(0.1), "truthy(0.1)")
   ok(datkt.tape.truthy(1234), "truthy(1234)")
